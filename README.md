@@ -8,6 +8,8 @@ Created with compatibility for _python 3.10.5_ and _3.9.13_
 
 * [__pyenv__](https://github.com/pyenv/pyenv)_^2.3.1_
 * [__click__](https://click.palletsprojects.com/en/8.1.x/)_^8.1.3_
+* [__pytube__](https://pytube.io/en/latest/index.html)_^12.1.0_
+* [__tqdm__](https://tqdm.github.io/)_^4.64.0"_
 
 ## Setup
 
