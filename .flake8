@@ -1,0 +1,13 @@
+[flake8]
+select = ANN,B,B9,BLK,C,C4,E,F,I,PT0,S,SC,W
+ignore = E203,E501,W503
+extend-ignore = SC200,B950,B101
+max-line-length = 120
+max-complexity = 10
+application-import-names = youtube_downloader,tests
+import-order-style = google
+docstring-convention = google
+# Disable warning about assertion from Bandit
+per-file-ignores =
+    tests/*:S101,ANN
+    noxfile.py:ANN
