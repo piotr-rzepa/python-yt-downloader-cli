@@ -46,5 +46,8 @@ def main(url: str, resolution: str, output_path: str, filename: str) -> None:
         stream.download(output_path=output_path, filename=filename)
         
     except pytube.exceptions.VideoUnavailable:
-            click.secho(f"❌ Video {url} is unavailable.", fg="red")
-            sys.exit(1)
+        click.secho(f"❌ Video {url} is unavailable.", fg="red")
+        sys.exit(1)
+    except pytube.exceptions.RegexMatchError:
+        click.secho(f"❌ URL watch link {url} is invalid.", fg="red")
+        sys.exit(1)

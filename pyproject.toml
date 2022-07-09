@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-yt-downloader-cli"
-version = "0.1.0"
+version = "1.0.0"
 description = "The youtube downloader CLI Python project"
 license = "MIT"
 readme = "README.md"
@@ -8,10 +8,24 @@ keywords = ["youtube", "cli", "python", "poetry", "pyenv"]
 homepage = "https://github.com/piotr-rzepa/python-yt-downloader-cli"
 repository = "https://github.com/piotr-rzepa/python-yt-downloader-cli"
 authors = ["Piotr Rzepkowski <piotr.rzepkowski98@gmail.com>"]
-packages = [ { include = "src" } ]
+maintainers = ["Piotr Rzepkowski <piotr.rzepkowski98@gmail.com>"]
+packages = [{ include = "youtube_downloader", from = "src" }]
 
 [tool.poetry.scripts]
-youtube-downloader = "youtube_downloader.cli:main"
+youtube-downloader = "src.youtube_downloader.cli:main"
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["src/youtube_downloader"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 90
+precision = 2
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -20,6 +34,10 @@ pytube = "^12.1.0"
 tqdm = "^4.64.0"
 
 [tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+coverage = {extras = ["toml"], version = "^6.4.1"}
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.8.1"
 
 
 [build-system]
