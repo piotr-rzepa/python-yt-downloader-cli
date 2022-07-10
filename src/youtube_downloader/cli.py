@@ -1,10 +1,8 @@
-"""Youtube videos downloader
-
+"""Youtube downloader command line interface.
 
 This script allows the user to download youtube video from given URL.
 
-The possible downloaded files, contain both audio and video as a single file (progressive)
-
+The possible downloaded files, contain both audio and video as a single file (progressive method).
 """
 
 import os
@@ -42,7 +40,16 @@ from . import __version__
 )
 @click.version_option(version=__version__)
 def main(url: str, resolution: str, output_path: str, filename: str) -> None:
+    """Downloads the Youtube video with specified options.
 
+    The options are passed to the CLI when executing the cli.py script.
+
+    Args:
+        url: A valid Youtube watch URL.
+        resolution: resolution in which file should be downloaded in format <value>p.
+        output_path: Location on filesystem at which the video should be saved.
+        filename: Custom filename for downloaded video. If not provided, defaults to the name from Youtube.
+    """
     try:
 
         yt = pytube.YouTube(url)

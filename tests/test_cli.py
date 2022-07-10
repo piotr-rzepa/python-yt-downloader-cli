@@ -1,3 +1,5 @@
+"""Test suite for youtube CLI downloader (cli.py)."""
+
 import os
 from pathlib import Path
 from typing import Dict, List
@@ -29,11 +31,13 @@ VALID_URL: str = "https://www.youtube.com/watch?v=YbJOTdZBX1g"
 
 @pytest.fixture(autouse=True)
 def cli_runner() -> CliRunner:
+    """Returns instance of click's CliRunner for testing purposes."""
     return click.testing.CliRunner()
 
 
 @pytest.mark.unit()
 def test_main_missing_url(cli_runner: CliRunner):
+    """Should raise exist code 2 with missing url argument."""
     result = cli_runner.invoke(cli.main)
     assert result.exit_code == 2
 
@@ -41,7 +45,7 @@ def test_main_missing_url(cli_runner: CliRunner):
 @pytest.mark.unit()
 @pytest.mark.parametrize("url", urls_fixture["invalid-urls"])
 def test_main_invalid_url(cli_runner: CliRunner, url: str) -> None:
-
+    """Should raise exist code 1 with invalid url argument."""
     result = cli_runner.invoke(cli.main, ["--url", url])
     assert result.exit_code == 1
     assert f"❌ URL watch link {url} is invalid." in result.output
@@ -50,6 +54,7 @@ def test_main_invalid_url(cli_runner: CliRunner, url: str) -> None:
 @pytest.mark.unit()
 @pytest.mark.parametrize("url", urls_fixture["unavailable-urls"])
 def test_main_video_unavailable(cli_runner: CliRunner, url: str) -> None:
+    """Should raise exit code 1 with valid url link pointing to the unavailable video."""
     result = cli_runner.invoke(cli.main, ["--url", url])
     assert result.exit_code == 1
     assert f"❌ Video {url} is unavailable." in result.output
@@ -59,6 +64,7 @@ def test_main_video_unavailable(cli_runner: CliRunner, url: str) -> None:
 def test_main_no_resolution_provided(
     cli_runner: CliRunner, mocker: MockerFixture
 ) -> None:
+    """Should pick highest possible resolution options if not provided."""
     import pytube
     import tqdm
 
@@ -84,6 +90,7 @@ def test_main_no_resolution_provided(
 def test_main_invalid_resolution(
     cli_runner: CliRunner, mocker: MockerFixture, arguments: List[str]
 ) -> None:
+    """Should display possible resolutions if provided one is not available for the video."""
     import pytube
     import tqdm
 
@@ -100,6 +107,7 @@ def test_main_invalid_resolution(
 
 @pytest.mark.e2e()
 def test_main_success_e2e_download_default_options(cli_runner: CliRunner) -> None:
+    """Should successfully download and save the video at default path under default filename with valid watch URL."""
     result = cli_runner.invoke(cli.main, ["--url", VALID_URL])
     assert result.exit_code == 0
     assert os.path.isfile(
@@ -117,6 +125,7 @@ def test_main_success_e2e_download_default_options(cli_runner: CliRunner) -> Non
 def test_main_success_e2e_download_custom_path(
     cli_runner: CliRunner, argument: str, tmp_path: Path
 ) -> None:
+    """Should successfully download and save the video at custom output path with default filename."""
     result = cli_runner.invoke(
         cli.main, ["--url", VALID_URL, argument, str(tmp_path.cwd())]
     )
@@ -140,6 +149,7 @@ def test_main_success_e2e_download_custom_path(
 def test_main_success_e2e_download_custom_filename(
     cli_runner: CliRunner, arguments: List[str]
 ) -> None:
+    """Should successfully download and save video at default path with custom filename."""
     result = cli_runner.invoke(cli.main, ["--url", VALID_URL, *arguments])
     assert result.exit_code == 0
     assert os.path.isfile(arguments[1])
@@ -173,6 +183,7 @@ def test_main_success_e2e_download_custom_filename(
 def test_main_success_e2e_download_different_parameters(
     cli_runner: CliRunner, arguments: List[str]
 ) -> None:
+    """Should successfully download and save video at correct path under correct name, depending of provided options."""
     result = cli_runner.invoke(cli.main, ["--url", VALID_URL, *arguments])
     assert result.exit_code == 0
 
