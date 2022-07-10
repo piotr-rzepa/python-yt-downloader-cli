@@ -1,5 +1,8 @@
 # python-yt-downloader-cli
 
+[![Tests](https://github.com/piotr-rzepa/python-yt-downloader-cli/workflows/Tests/badge.svg)](https://github.com/piotr-rzepa/python-yt-downloader-cli/actions?workflow=Tests)
+[![Codecov](https://github.com/piotr-rzepa/python-yt-downloader-cli/branch/main/graph/badge.svg)](https://app.codecov.io/gh/piotr-rzepa/python-yt-downloader-cli)
+
 Command line interface written in python for downloading youtube videos.
 Supports downloading multiple videos asynchronously.
 Created with compatibility for _python 3.10.5_ and _3.9.13_
@@ -21,6 +24,7 @@ Created with compatibility for _python 3.10.5_ and _3.9.13_
 * [__mypy__](http://mypy-lang.org/)_^0.961_
 * [__Sphinx__](https://www.sphinx-doc.org/en/master/)_^5.0.2_
 * [__Darglint__](https://github.com/terrencepreilly/darglint)_^1.8.1_
+* [__codecov__](https://about.codecov.io/)_^2.1.12_
 
 ## Usage
 
@@ -197,7 +201,9 @@ nox -rs docs
 
 ## CI/CD
 
-TBA
+[GitHub Actions](https://docs.github.com/en/actions) are used to setup CI/CD of the project. It runs the tests for both `3.9` and `3.10` Python versions and upload the coverage report to the [Codecov](https://about.codecov.io/). Each of the steps are executed on `ubuntu-latest`.
+
+Both GitHub workflows are located under `.github/workflows/`
 
 ## Useful links
 
