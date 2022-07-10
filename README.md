@@ -19,6 +19,12 @@ Created with compatibility for _python 3.10.5_ and _3.9.13_
 * [__flake8__](https://flake8.pycqa.org/en/latest/)_^3.9.2_
 * [__pre-commit__](https://pre-commit.com/)_^2.19.0_
 * [__mypy__](http://mypy-lang.org/)_^0.961_
+* [__Sphinx__](https://www.sphinx-doc.org/en/master/)_^5.0.2_
+* [__Darglint__](https://github.com/terrencepreilly/darglint)_^1.8.1_
+
+## Usage
+
+TBA
 
 ## Setup
 
@@ -136,7 +142,7 @@ nox -- -vvv --cov
 ## Linting, typing and pre-commit hooks
 
 [__Black__](https://github.com/psf/black) is used as a file formatter, configured together with [__Flake8__](https://flake8.pycqa.org/en/latest/) as a tool for enforcing consistent coding style across the project.
-Both are defined as a separate stages inside `noxfile.py` (formatting using Black is also done withing linting process with Flake8)
+Both are defined as a separate stages inside `noxfile.py` (formatting using Black is also done withing linting process with Flake8).
 The configuration file for Flake8 is located in the root directory of the project, inside `.flake8` file.
 There are also many plugins installed for Flake8, which further enhance the development by providing even more strictness and checks against violation of best code practices:
 
@@ -177,6 +183,17 @@ To run the pre-hooks without committing the changes:
 pre-commit run --all-files
 ```
 
+## Documentation
+
+Documentation is generated using [Sphinx](https://www.sphinx-doc.org/en/master/) from _docstrings_ and type annotations in the package and validated using [darglint](https://github.com/terrencepreilly/darglint).
+All the documentation is available under `docs/` directory, which includes `conf.py` (Sphinx configuration file) and `.rst` files used by Sphinx for technical documentation. The docs in HTML format are generated and available under `_build/index.html`.
+The configuration file for darglint is located in `.darglint` file in root directory.
+
+Generate documentation using Nox:
+
+```bash
+nox -rs docs
+```
 
 ## CI/CD
 
