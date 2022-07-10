@@ -7,7 +7,7 @@ import nox
 from nox.sessions import Session
 
 # Exclude Black from the session run -> code style is checked within lint stage
-nox.options.sessions = ("lint", "mypy_type_check", "tests", "docs/conf.py")
+nox.options.sessions = ("lint", "mypy_type_check", "tests", "docs")
 
 LOCATIONS: Tuple[str, str, str] = ("src", "tests", "noxfile.py")
 
@@ -81,3 +81,11 @@ def docs(session: Session) -> None:
     session.run("poetry", "install", "--no-dev", external=True)
     install_from_requirements(session, "sphinx", "sphinx-autodoc-typehints")
     session.run("sphinx-build", "docs", "docs/_build")
+
+
+@nox.session(python=["3.10", "3.9"])
+def coverage(session: Session) -> None:
+    """Uploads coverage data."""
+    install_from_requirements(session, "coverage[toml]", "codecov")
+    session.run("coverage", "xml", "--fail-under=0")
+    session.run("codecov", *session.posargs)
