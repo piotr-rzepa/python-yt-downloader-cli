@@ -1,11 +1,11 @@
 # python-yt-downloader-cli
 
 [![Tests](https://github.com/piotr-rzepa/python-yt-downloader-cli/workflows/Tests/badge.svg)](https://github.com/piotr-rzepa/python-yt-downloader-cli/actions?workflow=Tests)
-[![Codecov](https://github.com/piotr-rzepa/python-yt-downloader-cli/branch/main/graph/badge.svg)](https://app.codecov.io/gh/piotr-rzepa/python-yt-downloader-cli)
+[![codecov](https://codecov.io/gh/piotr-rzepa/python-yt-downloader-cli/branch/main/graph/badge.svg?token=TO9QFUR9LC)](https://codecov.io/gh/piotr-rzepa/python-yt-downloader-cli)
 
 Command line interface written in python for downloading youtube videos.
 Supports downloading multiple videos asynchronously.
-Created with compatibility for _python 3.10.5_ and _3.9.13_
+Created with compatibility for _python 3.10.5_ and _3.9.13_.
 
 ## Dependencies
 
@@ -28,7 +28,30 @@ Created with compatibility for _python 3.10.5_ and _3.9.13_
 
 ## Usage
 
-TBA
+```bash
+poetry run youtube-downloader [OPTIONS]
+```
+
+`--url` \<_watch url_\>
+An Youtube video URL link.
+
+`-r` \<_resolution_>\, `--resolution` \<_resolution_>\
+Resolution in which the video should be downloaded.
+Defaults to the highest possible resolution for given video.
+
+`-o` \<_path_>\, `--output-path` \<_path_>\
+Path on the local filesystem where the video should be saved.
+Default to the current working directory.
+
+`-f` \<_filename_>\, `--filename` \<_filename_>\
+Name of the file which the video will be saved under.
+Defaults to the title of the Youtube video.
+
+`--version`
+Display the version and exit.
+
+`--help`
+Display a short usage message and exit.
 
 ## Setup
 
@@ -67,7 +90,7 @@ python3.9 --version
 
 After installing _Poetry_, initialize Python project as follows:
 
-Add section to existing `~/.bashrc` script or create a new file and add the segment responsible for preparing `pyenv` virtual environment
+Add section to existing `~/.bashrc` script or create a new file and add the segment responsible for preparing `pyenv` virtual environment:
 
 ```bash
 export PYENV_ROOT="$HOME/.pyenv"
@@ -208,3 +231,4 @@ Both GitHub workflows are located under `.github/workflows/`
 ## Useful links
 
 * <https://cjolowicz.github.io/posts/hypermodern-python-01-setup/> (inspiration for this project)
+* <https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions>
